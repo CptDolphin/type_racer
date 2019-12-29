@@ -6,6 +6,8 @@ As I enjoy typeracing games decided to create my own version based on the sites 
 * 10fastfingers.com 
 * keybr.com 
 
+## Table of Contents
+
 1. [Packages](#packages)
 2. [Commands](#commands)
 
