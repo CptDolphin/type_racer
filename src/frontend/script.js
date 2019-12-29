@@ -1,16 +1,19 @@
 const RANDOM_QUOTE_API = 'http://api.quotable.io/random';
-const quote_display_elem = document.getElementById('quoteDisplay');
-const quote_input_elem = document.getElementById('quoteInput');
-const timer_elem = document.getElementById('timer');
+const display = document.querySelector('.display');
+const input = document.querySelector('.input');
+const timer = document.querySelector('.timer');
 
-quote_input_elem.addEventListener('input', () => {
-  const quote = quote_display_elem.querySelectorAll('span');
-  const input = quote_input_elem.value.split('');
+//const [display, input, timer] = 
+//    document.querySelectorAll('.display, .input, .timer');
+
+input.addEventListener('input', () => {
+  const quote = display.querySelectorAll('span');
+  const input_text = input.value.split('');
   let char = '';
   let correct = true;
 
   quote.forEach((word, index) => {
-    char = input[index];
+    char = input_text[index];
     if (char == null){
       word.classList.remove('correct');
       word.classList.remove('incorrect');
@@ -18,7 +21,6 @@ quote_input_elem.addEventListener('input', () => {
     } else if (char === word.innerText) {
       word.classList.add('correct');
       word.classList.remove('incorrect');
-      correct = true;
     } else {
       word.classList.remove('correct');
       word.classList.add('incorrect');
@@ -39,25 +41,25 @@ function get_random_quote() {
 
 async function render_new_quote() {
   const quote = await get_random_quote();
-  quote_display_elem.innerHTML = '';
+  display.innerHTML = '';
 
   quote.split('').forEach(char => {
     const char_span = document.createElement('span');
     char_span.innerText = char;
-    quote_display_elem.appendChild(char_span);
+    display.appendChild(char_span);
   });
 
-  quote_input_elem.value = null;
+  input.value = null;
   start_timer();
 }
 
 let start_time = null;
 
 function start_timer() {
-  timer_elem.innerText = 0; 
+  timer.innerText = 0; 
   start_time = new Date();
   setInterval(() => {
-    timer_elem.innerText = get_timer_time();
+    timer.innerText = get_timer_time();
   }, 1000);
 }
 
